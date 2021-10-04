@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LaneDetector : MonoBehaviour
 {
+    /*CALLS TOTAL HEIGHT OBJECT AND  SETS ITS HEIGHT ACOORDING */
+
+
     private TotalHeight _heightManager;
 
 

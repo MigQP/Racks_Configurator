@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class OpenPanel : MonoBehaviour
 {
+
+    // OPEN  PANEL SECTION OF UI
+
+
     public GameObject Panel;
 
     public void PanelOpener()

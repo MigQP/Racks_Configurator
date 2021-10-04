@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class MeasuresManager : MonoBehaviour
 {
+    /*TOGGLE MANAGER TO SHOW TOTAL MEASURE OF FURNITURE OBJECT AND INDIVIDUAL MEASURES FOR EACH RACK*/
+
+    //ALSO REFRESH MATERIALS WHEN CHANGED
+
     public GameObject[] _measureObjs;
 
     private Toggle _showMeasures;
@@ -17,7 +21,7 @@ public class MeasuresManager : MonoBehaviour
 
     private void Update()
     {
-
+        // GET ALL RACKS AND MEASURES
         _measureObjs = GameObject.FindGameObjectsWithTag("Module");
 
         for (int i = 0; i < _measureObjs.Length; i++)
@@ -36,6 +40,9 @@ public class MeasuresManager : MonoBehaviour
         }
 
     }
+
+
+    // SET NEW MATERIAL AND REFRESH OBJECT MATERIALS ARRAY
 
     public void ChangeBaseMat (Material _baseMat)
     {

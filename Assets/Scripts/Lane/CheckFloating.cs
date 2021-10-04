@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CheckFloating : MonoBehaviour
 {
+
+    /*THIS USES THE INDIVIDUAL RACK FOUR TRIGGERS (UP, DOWN AND SIDES) TO CHECK IF THE RACK IS FLOATING OR SUSPENDED IF SO, DELETE IT*/
+
     private GameObject mainObj;
 
     public GameObject[] moduleTriggers;

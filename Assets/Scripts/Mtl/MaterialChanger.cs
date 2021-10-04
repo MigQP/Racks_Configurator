@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MaterialChanger : MonoBehaviour
 {
+    /*DEPRECATED*/
+
+    /*MATERIAL CHANGE SYSTEM*/
 
     public Material[] _originalMaterialSet;
     public Material _pendingMat;

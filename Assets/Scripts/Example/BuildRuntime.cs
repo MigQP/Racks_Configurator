@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class BuildRuntime : MonoBehaviour
 {
+    /*DEPRECATED*/
+
+    /*SLIDERS-BASED (HEIGHT AND WIDTH) SYSTEM TO CREATE THE INITIAL FURNITURE*/
+
     public Transform _mediumModule;
     public Transform _largeModule;
     public Transform _littleModule;
@@ -24,11 +28,6 @@ public class BuildRuntime : MonoBehaviour
 
 
     private float _stackSeparation = .5f;
-    private float _secondStackSeparation = .75f;
-    private float _thirdStackSeparation = 1f;
-    private float _fourthSeparation = .875f;
-    private float _fifthSeparation = .9f;
-    private float _sixthSeparation = 0.92857142857f;
 
     // Start is called before the first frame update
     void Start()

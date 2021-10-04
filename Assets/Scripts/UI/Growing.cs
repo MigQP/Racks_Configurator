@@ -4,6 +4,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class Growing : MonoBehaviour
 { 
+
+    // BANNER SYSTEM FOR HEADER OF WINDOW
+
     private string startMessage = "Hello Player,It's Time to start Learning the Video Game Development";
     private string[] messages = { "Now, First Complete Your First Assingment", "Find Treasure", "Kill them" };
 

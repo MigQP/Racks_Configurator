@@ -5,6 +5,12 @@ using System.Linq;
 
 public class LanePoints : MonoBehaviour
 {
+    /*DEPRECATED*/
+
+
+    /*SPAWN SYSTEM FOR WHOLE VERTICAL LANE OF RACK ON THE LEFT OR THE RIGHT BASED ON THE WIDTH OF THE NEXT TO IT, IF NONE SAME WIDTH AS RACK SELECT OR SELECT A SPECIFIC ONE*/
+
+
     public List<GameObject> downRacks = new List<GameObject>();
     public List<GameObject> GetColliders() { return downRacks; }
 

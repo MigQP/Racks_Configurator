@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PriceToText : MonoBehaviour
 {
+    /*WRITE PRICE IN UI*/
+
     public Text _priceText;
     // Start is called before the first frame update
     void Start()

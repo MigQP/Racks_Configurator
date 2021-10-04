@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UpLane : MonoBehaviour
 {
+    /*ERASURE OF SINGULAR VERTICAL LANE AND MOVEMENT OF THE REST TO PUT THEM TOGETHER AGAIN WITH DISTANCE ACCORDING TO RACK WIDTH*/
+
+
     public List<GameObject> upRacks = new List<GameObject>();
     public List<GameObject> GetColliders() { return upRacks; }
 
@@ -26,6 +29,8 @@ public class UpLane : MonoBehaviour
         mainObj = transform.parent.gameObject;
         moduleWidth = mainObj.GetComponent<ConcurrentSpawn>().Width;
 
+
+        // MOVE DISTANCE SET
         switch (moduleWidth)
         {
             case 40:
@@ -77,6 +82,8 @@ public class UpLane : MonoBehaviour
     {
         upRacks.Remove(other.gameObject);
     }
+
+
 
     public void DestroyLane ()
     {
@@ -162,6 +169,7 @@ public class UpLane : MonoBehaviour
             Destroy(module);
         }
     }
+
 
     public void EndParent()
     {

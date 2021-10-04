@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class ExtrasPrice : MonoBehaviour
 {
+    // ADD OR REST EXTRAS PRICE 
+
     public float Price;
 
     // Start is called before the first frame update

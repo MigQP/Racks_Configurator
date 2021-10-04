@@ -6,6 +6,8 @@ using System.Linq;
 public class TotalHeight : MonoBehaviour
 {
 
+    /*CALCULATION OF TOTAL WIDTH AND HEIGHT FOR THE GAME OBJECT VIA AN LIST OF HORIZONTAL RACKS AND ONE OF VERTICAL RACKS*/
+
     public List<GameObject> verticalLane = new List<GameObject>();
     public GameObject _highestObj;
 
@@ -64,6 +66,8 @@ public class TotalHeight : MonoBehaviour
         if (!_totalHeightObj.active)
             return;
 
+
+        // GET LOWEST, HIGHEST AND WIDEST RACK OF ALL
         _highestObj = _measureManager._measureObjs.OrderByDescending(_highestObj => _highestObj.transform.position.y).First();
         _widestObj = _measureManager._measureObjs.OrderByDescending(_widestObj => _widestObj.transform.position.x).First();
         _leastXObj = _measureManager._measureObjs.OrderByDescending(_widestObj => _widestObj.transform.position.x).Last();
@@ -77,6 +81,8 @@ public class TotalHeight : MonoBehaviour
 
 
     }
+
+
 
     public void GetHeight ()
     {

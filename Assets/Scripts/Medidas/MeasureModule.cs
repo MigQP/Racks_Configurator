@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MeasureModule : MonoBehaviour
 {
+    // INDIVIDUAL RACK MEASURE OBJECT MANAGER
+
+    // ALSO SETS THE MATERIALS ON START
+
     public GameObject _measures;
     public MeshRenderer moduleRend;
     public int rackType;
@@ -82,6 +86,7 @@ public class MeasureModule : MonoBehaviour
     }
 
 
+    // GET MEASURE OBJECT 
     public void ShowSize (bool active)
     {
         _measures.SetActive(active);

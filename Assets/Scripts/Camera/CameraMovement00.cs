@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class CameraMovement00 : MonoBehaviour
 {
+    /*CAMERA SYTEM (ROTATION, PAN OR ZOOM) BASED ON UI TOGGLES (WITH CLAMPS)*/
+
+
     [SerializeField] private Camera mainCam;
     [SerializeField] private Transform targetObject;
 
@@ -67,37 +70,7 @@ public class CameraMovement00 : MonoBehaviour
             }
 
 
-            /*if (Input.GetMouseButton(0))
-            {
-                Vector3 direction = previousPosition - mainCam.ScreenToViewportPoint(Input.mousePosition);
 
-                mainCam.transform.position = targetObject.position;
-
-                mainCam.transform.Rotate(new Vector3(1, 0, 0), direction.y * 180);
-                mainCam.transform.Rotate(new Vector3(0, 1, 0), -direction.x * 180, Space.World);
-
-                mainCam.transform.Translate(new Vector3(0, 0, -11.4f));
-
-                previousPosition = mainCam.ScreenToViewportPoint(Input.mousePosition);
-
-            }*/
-            /*if (Input.GetMouseButton(0))
-            {
-                Vector3 direction = previousPosition - mainCam.ScreenToViewportPoint(Input.mousePosition);
-
-                mainCam.transform.position = targetObject.position;
-
-                //mainCam.transform.Rotate(new Vector3(1, 0, 0), direction.y * 180);
-                xRot = Mathf.Clamp(xRot, yMinLimit, yMaxLimit);
-                mainCam.transform.Rotate(new Vector3(0, 1, 0),-yRot * xRot, Space.World);
-
-
-
-                mainCam.transform.Translate(new Vector3(0, 0, -11.4f));
-
-                previousPosition = mainCam.ScreenToViewportPoint(Input.mousePosition);
-
-            }*/
 
         }
 
@@ -147,19 +120,7 @@ public class CameraMovement00 : MonoBehaviour
     {
         float zoomChangeAmount = 40f;
 
-        /*
-        if (Input.mouseScrollDelta.y > 0)
-        {
-            zoom -= zoomChangeAmount * Time.deltaTime;
-            mainCam.transform.Translate((Vector3.forward * zoom) * Time.deltaTime);
-        }
 
-        if (Input.mouseScrollDelta.y < 0)
-        {
-            zoom += zoomChangeAmount * Time.deltaTime;
-            mainCam.transform.Translate((-Vector3.forward * zoom) * Time.deltaTime);
-        }
-        */
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CheckBuild : MonoBehaviour
 {
+    /*TURN ON COLLIDER AFTER SPAWN AND CHECK IF THERE IS OTHER RACKS AROUND, IF SO DON'T SHOW THE SPAWN BUTTON IN THOSE POSITIONS*/
+
     public GameObject spawnButton;
     public GameObject _module;
 

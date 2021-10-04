@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ValueToNum : MonoBehaviour
 {
+    /* WRITING OF SLIDER TEXT VALUE NEXT TO
+     IT IS FIXED  BECAUSE THE FURNITURE STARTING SIZE IS LIMITED*/ 
+
     public Slider _measureAnchuraSlider;
     public Slider _measureAlturaSlider;
 

@@ -7,6 +7,7 @@ using UnityEngine;
 public class Billboard : MonoBehaviour
 {
 
+    // ROTATE INDIVIDUAL RACK MEASURE OBJECT TO CAMERA ALWAYS
     void Update()
     {
 

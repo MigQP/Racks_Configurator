@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    /*DEPRECATED*/
+
+    /*CAMERA SYSTEM BASED ON FIXED POSITIONS*/
+
     public Transform view;
     public float transitionSpeed;
     Transform currentView;

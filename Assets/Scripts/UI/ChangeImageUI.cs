@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ChangeImageUI : MonoBehaviour
 {
+    // HEADER SECTION IMAGE CHANGE
 
     public Sprite sprite1;
     public GameObject img;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ParentBuilt : MonoBehaviour
 { 
+    /*PARENT RACKS TO MAIN GAMEOBJECT IN CASE IT IS NEEDED TO MOVE THE WHOLE FURNITURE*/
+
+
     private Transform _mainObject;
 
     public GameObject spawnButtons;

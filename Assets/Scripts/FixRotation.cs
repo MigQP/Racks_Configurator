@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class FixRotation : MonoBehaviour
 {
+    /*THIS SCRIPT ENSURES THAT THE INCOMING RACK ROTATION IS CONSISTENT WITH THE REST*/
+
+
     public GameObject originalObj;
     private Transform detectorT;
 

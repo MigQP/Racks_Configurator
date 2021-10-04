@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CameraRotation : MonoBehaviour
 {
+
+    /*DEPRECATED*/
+
+    /*CAMERA ROTATION SYSTEM*/
+
     void Update()
     {
         rotateCamera();

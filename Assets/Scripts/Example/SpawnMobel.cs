@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SpawnMobel : MonoBehaviour
 {
+    /*DEPRECATED*/
+
+    /*TEST SYSTEM TO SPAWN RACK NEXT TO OTHER*/
+
+
     public GameObject leftFurniture;
 
     // Start is called before the first frame update

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ConcurrentSpawn : MonoBehaviour
 {
+    /*MAIN SPAWN SYSTEM FOR INDIVIDUAL RACKS 
+      FIRST BEING THE PREVIEW RACK AND WHEN CONFIRMED THE FINAL RACK IN ONE OF THREE POSITIONS (UP, LEFT OR RIGHT)*/
+
     public float Price;
     public float Width;
     public float Height;
@@ -45,6 +48,8 @@ public class ConcurrentSpawn : MonoBehaviour
         _laneDetector = GetComponentInChildren<LanePoints01>();
         CheckPreviousExtras();
         ErasePending();
+
+        // CHECKS IF TT IS A BASE RACK
         if (_laneDetector != null)
             return;
             _upLaneDetector = GetComponentInChildren<UpLane>();
@@ -66,6 +71,8 @@ public class ConcurrentSpawn : MonoBehaviour
 
     //SISTEMA DE PENDINTE Y SPAWN
 
+
+    // PREVIEW RACKS DEPENDING ON EACH WIDTH / HEIGHT
     public void CreatePendingStacks()
     {
         ErasePending();

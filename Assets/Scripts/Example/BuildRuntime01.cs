@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class BuildRuntime01 : MonoBehaviour
 {
+    /*SLIDERS-BASED (HEIGHT AND WIDTH) SYSTEM TO CREATE THE INITIAL FURNITURE*/
 
 
+    
     public Transform[] _racks;  
 
 
@@ -19,12 +21,6 @@ public class BuildRuntime01 : MonoBehaviour
 
     public Transform[] _pendings;
 
-    private float _stackSeparation = .5f;
-    private float _secondStackSeparation = .75f;
-    private float _thirdStackSeparation = 1f;
-    private float _fourthSeparation = .875f;
-    private float _fifthSeparation = .9f;
-    private float _sixthSeparation = 0.92857142857f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +29,7 @@ public class BuildRuntime01 : MonoBehaviour
        
     }
 
-
+    //CROSSED PRODUCT OF THE HORIZONTAL SLIDER AND THE VERTICAL SLIDER IN CASES
     public void CreateFurtniture()
     {
         CheckForPrevious();
@@ -347,6 +343,8 @@ public class BuildRuntime01 : MonoBehaviour
 
     }
 
+
+    // IF USING AGAIN THE SLIDERS CHECK TO NOT HAVE REPEATED FURNITURE
     void CheckForPrevious()
     {
         if (transform.childCount > 0)

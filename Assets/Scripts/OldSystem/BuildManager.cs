@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
+    /*DEPRECATED*/
+
     public GameObject foundation;//preview 
     //public GameObject wall;
     //public GameObject ceiling;

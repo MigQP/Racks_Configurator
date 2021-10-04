@@ -5,6 +5,12 @@ using System.Linq;
 
 public class LanePoints01 : MonoBehaviour
 {
+
+    /*SPAWN SYSTEM FOR WHOLE VERTICAL LANE OF RACK ON THE LEFT OR THE RIGHT BASED ON THE WIDTH OF THE NEXT TO IT, IF NONE SAME WIDTH AS RACK SELECT OR SELECT A SPECIFIC ONE*/
+
+    // CREATES A LIST OF RACKS DOWN OF IT TO CALL A SPAWN FUNCTION IN EACH OF THEM ACCORDING TO THEIR SPECIFIC WIDTH AND THEN HEIGHT
+
+
     public List<GameObject> downRacks = new List<GameObject>();
     public List<GameObject> GetColliders() { return downRacks; }
 
@@ -59,23 +65,7 @@ public class LanePoints01 : MonoBehaviour
 
 
 
-    /*
-    void Update()
-    {
-        for (int v = 0; v < downRacks.Count; v++)
-        {
-            if (downRacks[v] == null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[0].GetComponent<CheckBuild>()._module != null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module != null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null ||
-                downRacks[v] == null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[0].GetComponent<CheckBuild>()._module != null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module != null ||
-                downRacks[v] == null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[0].GetComponent<CheckBuild>()._module == null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module != null ||
-                downRacks[v] == null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[0].GetComponent<CheckBuild>()._module == null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module != null && mainObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module == null)
-            { 
-                //Destroy(mainObj);
-            }
-        }
-
-    }
-    */
-
+    // ADD TO VERTICAL LANE LIST
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Module")
@@ -83,11 +73,16 @@ public class LanePoints01 : MonoBehaviour
         if (!downRacks.Contains(other.gameObject)) { downRacks.Add(other.gameObject); }
     }
 
+
+    // REMOVE TO VERTICAL LANE LIST
+
     private void OnTriggerExit(Collider other)
     {
         downRacks.Remove(other.gameObject);
     }
 
+
+    // PREVIEW VERTICAL LANE RACKS
     public void CreateRightPendingLane ()
     {
         downRacks = downRacks.Where(item => item != null).ToList();
@@ -516,6 +511,8 @@ public class LanePoints01 : MonoBehaviour
         }
     }
 
+    // VERTICAL LANE RACKS
+
     public void CreateRightLane()
     {
         if (downRacks.Count == 0)
@@ -535,28 +532,7 @@ public class LanePoints01 : MonoBehaviour
 
                 if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null)
                 {
-                    //_laneSpawnPoints.Add(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform);
-                    /*switch (_moduleWidth)
-                    {
-                        case 40:
-                            if(downRacks[i].transform.rotation.y == -1)
-                            {
-                                Instantiate(downRacks[i], downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position, Quaternion.identity);
-                            }
 
-                            else
-                            {
-                                Instantiate(downRacks[i], downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y + 180, transform.rotation.z));
-                            }
-
-                            break;
-                        case 61:
-
-                            break;
-                        case 80:
-
-                            break;
-                    }*/
 
                     switch (_moduleWidth)
                     {
@@ -925,6 +901,8 @@ public class LanePoints01 : MonoBehaviour
         }
     }
 
+
+    // PREVIEW VERTICAL LANE RACKS
     public void CreateLefttPendingLane()
     {
         
@@ -1165,43 +1143,7 @@ public class LanePoints01 : MonoBehaviour
                 {
 
 
-                    /*
-                    if (_leftWidth == 25 && _leftWidth != _moduleWidth)
-                    {
-                        Instantiate(middlePendingObj[1], downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position, Quaternion.identity);
 
-                        isDownLeftCLear = false;
-                    }
-                    if (_leftWidth == 60 && _leftWidth != _moduleWidth)
-                    {
-                        if (_moduleWidth == 25)
-                        {
-                            Instantiate(middlePendingObj[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), Quaternion.identity);
-
-                            isDownLeftCLear = false;
-                        }
-
-                        else
-                        {
-
-                            Instantiate(middlePendingObj[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), Quaternion.identity);
-
-                            isDownLeftCLear = false;
-                        }
-
-                        //var Example = Instantiate(middlePendingObj[0], new Vector3 (downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x -leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), Quaternion.identity);
-                        //Example.gameObject.tag = "Pending";
-                        //isDownLeftCLear = false;
-                    }
-
-                    if (_leftWidth == _moduleWidth)
-                    {
-                        // 27/06/2021 CORREGIR AQUI
-                        //Instantiate(middlePendingObj[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), Quaternion.identity);
-
-                        //isDownLeftCLear = false;
-                    }
-                    */
 
                     if (_moduleWidth == _leftWidth)
                     {
@@ -1347,6 +1289,8 @@ public class LanePoints01 : MonoBehaviour
         }
     }
 
+    // VERTICAL LANE RACKS
+
     public void CreateLeftLane()
     {
         if (downRacks.Count == 0)
@@ -1402,40 +1346,7 @@ public class LanePoints01 : MonoBehaviour
                 else
                 {
 
-                    /*
-                    if (_leftWidth == 25 && _leftWidth != _moduleWidth)
-                    {
-                        Instantiate(middleObj[1], downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position, Quaternion.identity);
-
-                    }
-
-                    if (_leftWidth == 60 && _leftWidth != _moduleWidth)
-                    {  
-                        if (_moduleWidth == 25)
-                        {
-                            Instantiate(middleObj[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), Quaternion.identity);
-                        }
-
-                        else
-                        {
-                            Instantiate(middleObj[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), Quaternion.identity);
-                        }
-
-                        //Instantiate(middleObj[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), Quaternion.identity);
-                    }
-
-
-
-
-                    if (_leftWidth == _moduleWidth)
-                    {
-
-                        Instantiate(downRacks[i], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x -leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), Quaternion.identity);
-                    }
-
-
-                    //Instantiate(middleObj[0], downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position, Quaternion.identity);
-                    */
+     
                     
                     
                     if (_moduleWidth == _leftWidth)
@@ -1589,6 +1500,8 @@ public class LanePoints01 : MonoBehaviour
         }
     }
 
+
+    // WIDTH OF RACK NEXT TO SELECTED ONE 
     public void GetWidths()
     {
         //_rightWidth = DownSideTriggers[0].GetComponent<FixedWidth>().directionWidth;
@@ -1634,97 +1547,10 @@ public class LanePoints01 : MonoBehaviour
             _leftWidth = DownSideTriggers[1].GetComponent<FixedWidth>().directionWidth;
         }
     
-        /*
 
-            if (mainObj.transform.rotation.y == lowestObj.transform.rotation.y)
-            {
-                if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module != null)
-                {
-
-
-                    _leftWidth = lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module.GetComponent<ConcurrentSpawn>().Width;
-                }
-
-                else
-                {
-                    _leftWidth = _moduleWidth;
-                }
-
-                if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module != null)
-                {
-
-
-                    _rightWidth = lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module.GetComponent<ConcurrentSpawn>().Width;
-                }
-
-                else
-                {
-                    _rightWidth = _moduleWidth;
-                }
-            }
-
-            else
-            {
-                
-                if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module != null)
-                {
-
-
-                    _rightWidth = lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module.GetComponent<ConcurrentSpawn>().Width;
-                }
-
-                else
-                {
-                    _rightWidth = _moduleWidth;
-                }
-
-                if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module != null)
-                {
-
-
-                    _leftWidth = lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module.GetComponent<ConcurrentSpawn>().Width;
-                }
-
-                else
-                {
-                    _leftWidth = _moduleWidth;
-                }
-                
-            }
-        
-        */
-
-        
-
-        /*
-        
-        if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module != null)
-        {
-
-
-            _leftWidth = lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module.GetComponent<ConcurrentSpawn>().Width;
-        }
-
-        else
-        {
-            _leftWidth = _moduleWidth;
-        }
-
-        if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module != null)
-        {
-
-
-            _rightWidth = lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module.GetComponent<ConcurrentSpawn>().Width;
-        }
-
-        else
-        {
-            _rightWidth = _moduleWidth;
-        }
-        
-        */
 
     }
+
 
 
     public void SetLowest ()
@@ -1772,234 +1598,16 @@ public class LanePoints01 : MonoBehaviour
 
     }
 
+
+    // VERTICAL LANE RACKS
     public void NewLeftLane ()
     {
-        /*for (int i = 0; i < downRacks.Count; i++)
-        {
-            if (downRacks[i] != lowestObj)
-            {
-                downRacks[i].GetComponent<ConcurrentSpawn>().CreateNewRightRack(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform);
-
-            }
-
-
-            if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null)
-            {
-                lowestObj.GetComponent<ConcurrentSpawn>().CreateNewRightRack(lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform);
-            }
-
-            downRacks[i].GetComponent<ConcurrentSpawn>().CreateNewLeftRack(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform);
-        }
-        */
 
 
 
         for (int i = 0; i < downRacks.Count; i++)
         { 
-            /*
-            if (mainObj.transform.rotation.y == downRacks[i].transform.rotation.y)
-            {
-                Debug.Log("MISMO SENTIDO");
-                if (downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module == null)
-                {
-                    if (_moduleWidth == _leftWidth)
-                    {
-                        Instantiate(downRacks[i], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.rotation);
-                    }
-
-
-                    else
-                    {
-                        switch (_leftWidth)
-                        {
-                            case 40:
-                                switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                {
-                                    case 25:
-                                        Instantiate(stacksManager._racks[3], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                        break;
-                                    case 45:
-                                        Instantiate(stacksManager._racks[1], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                        break;
-                                    case 60:
-                                        Instantiate(stacksManager._racks[2], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                        break;
-
-                                }
-                                break;
-                            case 61:
-                                switch (_moduleWidth)
-                                {
-                                    case 40:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[7], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[5], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[6], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                    case 61:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[7], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[5], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[6], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                    case 80:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[7], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[5], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[6], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                }
-
-                                break;
-                            case 80:
-                                switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                {
-                                    case 25:
-                                        Instantiate(stacksManager._racks[11], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                        break;
-                                    case 45:
-                                        Instantiate(stacksManager._racks[9], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                        break;
-                                    case 60:
-                                        Instantiate(stacksManager._racks[10], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                        break;
-                                }
-                                break;
-                        }
-
-                        //Instantiate(downRacks[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.rotation);
-
-                    }
-
-                }
-            }
-
-            else
-            {
-                Debug.Log("GIRAR TRANSFORMS");
-
-                if (downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null)
-                {
-                    if (_moduleWidth == _rightWidth)
-                    {
-                        Instantiate(downRacks[i], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.rotation);
-                    }
-
-                    else
-                    {
-                        switch (_rightWidth)
-                        {
-                            case 40:
-                                switch (_moduleWidth)
-                                {
-                                    case 40:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[3], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[1], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[2], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                    case 61:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[3], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[1], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[2], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                    case 80:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[3], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[1], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[2], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                }
-
-                                //Instantiate(stacksManager._racks[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                break;
-                            case 61:
-                                switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                {
-                                    case 25:
-                                        Instantiate(stacksManager._racks[7], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                        break;
-                                    case 45:
-                                        Instantiate(stacksManager._racks[5], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                        break;
-                                    case 60:
-                                        Instantiate(stacksManager._racks[6], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                        break;
-                                }
-
-                                break;
-                            case 80:
-                                switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                {
-                                    case 25:
-                                        Instantiate(stacksManager._racks[11], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                        break;
-                                    case 45:
-                                        Instantiate(stacksManager._racks[9], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                        break;
-                                    case 60:
-                                        Instantiate(stacksManager._racks[10], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                        break;
-                                }
-                                break;
-                        }
-
-                        //Instantiate(downRacks[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.rotation);
-                    }
-
-                }
-
-            }
-            */
+   
             
             if (downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module == null)
             {
@@ -2115,235 +1723,17 @@ public class LanePoints01 : MonoBehaviour
         }
     }
 
+
+    // VERTICAL LANE RACKS
     public void NewRightLane()
     {
-        /*
-        for (int i = 0; i < downRacks.Count; i++)
-        {
-            if (downRacks[i] != lowestObj)
-            {
-                downRacks[i].GetComponent<ConcurrentSpawn>().CreateNewRightRack(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform);
 
-            }
-            
-
-            if (lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null)
-            {
-                lowestObj.GetComponent<ConcurrentSpawn>().CreateNewRightRack(lowestObj.GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform);
-            }
-            
-
-          
-            //downRacks[i].GetComponent<ConcurrentSpawn>().CreateNewRightRack(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform);
-        }
-        */
 
 
 
         for (int i = 0; i < downRacks.Count; i++)
         {
-            /*
-            if (mainObj.transform.rotation.y == downRacks[i].transform.rotation.y)
-            {
-                Debug.Log("MISMO SENTIDO");
-                if (downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null)
-                {
-                    if (_moduleWidth == _rightWidth)
-                    {
-                        Instantiate(downRacks[i], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.rotation);
-                    }
 
-                    else
-                    {
-                        switch (_rightWidth)
-                        {
-                            case 40:
-                                switch (_moduleWidth)
-                                {
-                                    case 40:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[3], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[1], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[2], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                    case 61:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[3], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[1], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[2], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                    case 80:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[3], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[1], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[2], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                }
-
-                                //Instantiate(stacksManager._racks[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                break;
-                            case 61:
-                                switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                {
-                                    case 25:
-                                        Instantiate(stacksManager._racks[7], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                        break;
-                                    case 45:
-                                        Instantiate(stacksManager._racks[5], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                        break;
-                                    case 60:
-                                        Instantiate(stacksManager._racks[6], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[0].transform.rotation);
-                                        break;
-                                }
-
-                                break;
-                            case 80:
-                                switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                {
-                                    case 25:
-                                        Instantiate(stacksManager._racks[11], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                        break;
-                                    case 45:
-                                        Instantiate(stacksManager._racks[9], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                        break;
-                                    case 60:
-                                        Instantiate(stacksManager._racks[10], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[2].transform.rotation);
-                                        break;
-                                }
-                                break;
-                        }
-
-                        //Instantiate(downRacks[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].transform.rotation);
-                    }
-
-                }
-            }
-
-            else
-            {
-                Debug.Log("GIRAR TRANSFORMS");
-                if (downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].GetComponent<CheckBuild>()._module == null)
-                {
-                    if (_moduleWidth == _leftWidth)
-                    {
-                        Instantiate(downRacks[i], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.rotation);
-                    }
-
-
-                    else
-                    {
-                        switch (_leftWidth)
-                        {
-                            case 40:
-                                switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                {
-                                    case 25:
-                                        Instantiate(stacksManager._racks[3], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                        break;
-                                    case 45:
-                                        Instantiate(stacksManager._racks[1], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                        break;
-                                    case 60:
-                                        Instantiate(stacksManager._racks[2], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                        break;
-
-                                }
-                                break;
-                            case 61:
-                                switch (_moduleWidth)
-                                {
-                                    case 40:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[7], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[5], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[6], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                    case 61:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[7], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[5], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[6], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[1].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                    case 80:
-                                        switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                        {
-                                            case 25:
-                                                Instantiate(stacksManager._racks[7], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                                break;
-                                            case 45:
-                                                Instantiate(stacksManager._racks[5], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                                break;
-                                            case 60:
-                                                Instantiate(stacksManager._racks[6], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                                break;
-                                        }
-                                        break;
-                                }
-
-                                break;
-                            case 80:
-                                switch (downRacks[i].GetComponent<ConcurrentSpawn>().Height)
-                                {
-                                    case 25:
-                                        Instantiate(stacksManager._racks[11], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                        break;
-                                    case 45:
-                                        Instantiate(stacksManager._racks[9], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                        break;
-                                    case 60:
-                                        Instantiate(stacksManager._racks[10], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._otherPoints[3].transform.rotation);
-                                        break;
-                                }
-                                break;
-                        }
-
-                        //Instantiate(downRacks[0], new Vector3(downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.x - leftSeparation, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.y, downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.position.z), downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[2].transform.rotation);
-
-                    }
-
-                }
-            }
-            */
 
             
             if (downRacks[i].GetComponent<ConcurrentSpawn>()._spawnPoints[1].GetComponent<CheckBuild>()._module == null)

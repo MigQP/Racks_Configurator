@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExtrasManager : MonoBehaviour
 {
+    /*IN CHARGE OF ADDING EXTRA THINGS TO THE SELECTED RACK ON CLICK DEPENDING ON ITS OWN WIDTH/HEIGHT */
+
     public GameObject _pressedRack;
     public Transform[] _extraObject;
 
@@ -13,11 +15,15 @@ public class ExtrasManager : MonoBehaviour
         
     }
 
+
+    // GET SELECTED RACK
     public void ActualRack (GameObject _selectedRack)
     {
         _pressedRack = _selectedRack;
     }
 
+
+    /* DEPRECATED */
     public void SpawnExtra(Transform _extraToSpawn)
     {
         CheckPreviousExtras();
@@ -58,7 +64,10 @@ public class ExtrasManager : MonoBehaviour
         newObject.transform.parent = _pressedRack.transform;
 
     }
+    /* DEPRECATED */
 
+
+    //BEFORE ADDING AN EXTRA THIS METHOD IS CALLED TO ENSURE THERES NO OTHER EXTRA PIECE
     public void CheckPreviousExtras ()
     {
         if (_pressedRack.transform.childCount > 0)
@@ -71,6 +80,8 @@ public class ExtrasManager : MonoBehaviour
     }
 
 
+
+    // IF THERES NO RACK NEXT TO THE SELECTED ONE, SET A NEW WIDTH (DEFAULT IS SAME WIDTH AS CLICKED)
     public void SetNextWidth(float moduleWidth)
     {
        ModuleCornerManager.setWidth = moduleWidth;
@@ -104,6 +115,8 @@ public class ExtrasManager : MonoBehaviour
 
 
     // NUEVO SPAWN DE EXTRAS
+
+    // SPAWN SYTEM OF EXTRA BASE ON WIDTH OF RACK AND THEN HEIGHT
  
     public void SpawnNewCajon()
     {

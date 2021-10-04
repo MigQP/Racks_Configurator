@@ -4,6 +4,11 @@ using System.Collections;
 
 public class DragMouseOrbit : MonoBehaviour
 {
+    /*DEPRECATED*/
+
+    /*CAMERA SYSTEM LIMITED BY CLAMPS*/
+
+
     public Transform target;
     public float distance = 2.0f;
     public float xSpeed = 20.0f;

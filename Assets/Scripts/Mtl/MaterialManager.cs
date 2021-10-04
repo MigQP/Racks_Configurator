@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// FURNITURE MATERIALS SINGLETON
 public static class MaterialManager 
 {
     public static Material conectorMaterial;

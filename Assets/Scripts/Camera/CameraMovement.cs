@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
+    /*CAMERA SYTEM (ROTATION, PAN OR ZOOM) BASED ON UI TOGGLES (NO CLAMPS)*/
+
     [SerializeField] private Camera mainCam;
     [SerializeField] private Transform targetObject;
 
